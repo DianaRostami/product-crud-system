@@ -22,14 +22,28 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $product = new Product;
+        $request->validate([
+            'name'=>'required|max:100',
+            'description'=>'nullable|min:3',
+            'size'=>'required|decimal:0.2|max:100'
 
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->size = $request->size;
+        ]);
 
-        $product->save();
+
+        Product::create($request->input());
 
         return redirect()->route('products.index');
+    }
+
+    public function show(string $id)
+    {
+        $product = Product::find($id);
+
+        if($product === null) {
+            abort(404);
+        }
+
+        return view('products.show'
+        ,compact('product'));
     }
 }
