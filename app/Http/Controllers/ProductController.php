@@ -50,4 +50,9 @@ class ProductController extends Controller
     {
         return view('products.edit', compact('product'));
     }
+
+    public function update(Request $request, Product $product)
+    {
+
+    }
 }
