@@ -14,12 +14,11 @@ class ProductController extends Controller
 
 //        dd($products);
 
-        return view('Products.index', ['products' => Product::all()]);
+        return view('Products.index', ['products' => Product::orderBy('created_at')->paginate(3)]);
     }
     public function create()
     {
-        return view('Products.create', ['products' => Product::all()])
-            ->with('status', 'Product created successfully!');
+        return view('Products.create', ['products' => Product::all()]);
     }
 
     public function store(SaveProductRequest $request)
@@ -27,7 +26,8 @@ class ProductController extends Controller
 
         $product = Product::create($request->validated());
 
-        return redirect()->route('products.show', $product);
+        return redirect()->route('products.show', $product)
+            ->with('status', 'Product created successfully!');
     }
 
     public function show(Product $product)
