@@ -5,4 +5,6 @@
 
     <p>{{ $product->size }}</p>
 
+    <a href="{{ route('products.edit', $product->id) }}">Edit</a>
+
 </x-layout>

@@ -36,6 +36,9 @@ Route::get('/products/create', [ProductController::class, 'create'])
 Route::post('/products/store', [ProductController::class, 'store'])
     ->name('products.store');
 
-Route::get('products/{id}', [ProductController::class, 'show'])
-    ->name('products.show')
-    ->whereNumber('id');
+Route::get('products/{product}', [ProductController::class, 'show'])
+    ->name('products.show');
+//    ->whereNumber('id');
+
+Route::get('products/{product}/edit', [ProductController::class, 'edit'])
+    ->name('products.edit');
